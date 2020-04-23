@@ -1,7 +1,7 @@
 from typing import List
 
 from childrenevents.ua.lviv.iot.model import ChildrenEventOption
-from childrenevents.ua.lviv.iot.model.EventVenue import EventVenue
+from childrenevents.ua.lviv.iot.model.event_venue import EventVenue
 
 
 class ChildrenEventsOptionsManager:

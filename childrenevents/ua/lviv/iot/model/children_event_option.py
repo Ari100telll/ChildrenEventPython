@@ -1,4 +1,4 @@
-from childrenevents.ua.lviv.iot.model.EventVenue import EventVenue
+from childrenevents.ua.lviv.iot.model.event_venue import EventVenue
 
 
 class ChildrenEventOption:

@@ -1,2 +1,0 @@
-class ChildrenEventsOptionsManagerUtils:
-    pass
