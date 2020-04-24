@@ -1,3 +1,5 @@
+import doctest
+
 from typing import List
 
 from childrenevents.ua.lviv.iot.model import ChildrenEventOption
@@ -24,14 +26,33 @@ class ChildrenEventsOptionsManager:
                                  min_price_in_uah: float = None,
                                  quantity_of_children: int = None,
                                  venue: EventVenue = None
-                                 ):
+                                 ) -> List[ChildrenEventOption]:
+        """
+        >>> manager = ChildrenEventsOptionsManager([ChildrenEventOption(name="volleyball", price_in_uah=100), ChildrenEventOption(name="football", price_in_uah=150), ChildrenEventOption(name="disco", price_in_uah=10), ChildrenEventOption(name="it course", price_in_uah=20)])
+        >>> manager.find_option_by_criterion(max_price_in_uah=100)
+        [ChildrenEventOption(venue=EventVenue.MIXED, name=volleyball, contact_number=, price_in_uah=100, max_quantity_of_children=0, duration_in_minutes=0), ChildrenEventOption(venue=EventVenue.MIXED, name=disco, contact_number=, price_in_uah=10, max_quantity_of_children=0, duration_in_minutes=0), ChildrenEventOption(venue=EventVenue.MIXED, name=it course, contact_number=, price_in_uah=20, max_quantity_of_children=0, duration_in_minutes=0)]
+        """
         founded_options: List[ChildrenEventOption] = []
-        for option in self.children_event_options:
-            if ((option.price_in_uah is None) or (
-                    (option.price_in_uah <= max_price_in_uah) and (option.price_in_uah >= min_price_in_uah))) and (
-                    (option.max_quantity_of_children is None) or (
-                    option.max_quantity_of_children >= quantity_of_children)) and (
-                    (option.duration_in_minutes is None) or (
-                    option.duration_in_minutes <= max_duration_in_minutes)) and (
-                    (option.venue is None) or (option.venue is venue) or (option.venue is EventVenue.MIXED)):
-                founded_options += [option]
+        for event_option in self.children_event_options:
+            if ((quantity_of_children is None) or (
+                    event_option.max_quantity_of_children >= quantity_of_children)) and (
+                    (max_price_in_uah is None) or (event_option.price_in_uah <= max_price_in_uah)) and (
+                    (min_price_in_uah is None) or (event_option.price_in_uah >= min_price_in_uah)) and (
+                    (max_duration_in_minutes is None) or (
+                    event_option.duration_in_minutes <= max_duration_in_minutes)) and (
+                    (venue is None) or (event_option.venue is venue) or (event_option.venue is EventVenue.MIXED)):
+                founded_options += [event_option]
+        return founded_options
+
+
+def do_test():
+    manager = ChildrenEventsOptionsManager([ChildrenEventOption(name="volleyball", price_in_uah=100),
+                                            ChildrenEventOption(name="football", price_in_uah=150),
+                                            ChildrenEventOption(name="disco", price_in_uah=10),
+                                            ChildrenEventOption(name="it course", price_in_uah=20)])
+    list_options = tuple(manager.find_option_by_criterion(max_price_in_uah=100))
+    return str(list_options)
+
+
+if __name__ == '__main__':
+    doctest.testmod(verbose=True)
