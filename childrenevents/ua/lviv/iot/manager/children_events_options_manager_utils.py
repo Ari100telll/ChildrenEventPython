@@ -2,8 +2,7 @@ import doctest
 from operator import attrgetter
 from typing import List
 
-from childrenevents.ua.lviv.iot.manager.children_events_options_manager import ChildrenEventsOptionsManager
-from childrenevents.ua.lviv.iot.model import ChildrenEventOption
+from childrenevents.ua.lviv.iot.model.children_event_option import ChildrenEventOption
 from childrenevents.ua.lviv.iot.model.sort_type import SortType
 
 

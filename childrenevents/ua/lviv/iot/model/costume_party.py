@@ -19,6 +19,9 @@ class CostumeParty(ChildrenEventOption):
     def __str__(self):
         return 'CostumeParty(' + ', '.join((f"{name}={value}" for name, value in self.__dict__.items())) + ')'
 
+    def __repr__(self):
+        return str(self)
+
 
 if __name__ == '__main__':
     print(CostumeParty("First"))
