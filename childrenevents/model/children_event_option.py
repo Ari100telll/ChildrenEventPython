@@ -1,4 +1,4 @@
-from event_venue import EventVenue
+from childrenevents.model.event_venue import EventVenue
 
 
 class ChildrenEventOption:
